@@ -1,5 +1,5 @@
-const pisos = [5, 15, 13, 2];
-const inicial = 4;
+const pisos = [5, 15, 13, 2]; //Ingresar aquí los pisos
+const inicial = 4; //Ingresar aquí el piso actual del elevador
 
 elevador(pisos, inicial);
 
@@ -8,15 +8,15 @@ function elevador(pisos, inicial) {
   if (validaciones(pisos, inicial) === false) return;
 
   //Información inicial
-  console.log(pisos);
-  console.log(inicial);
+  console.log("Arreglo de pisos: ", pisos);
+  console.log("Piso inicial de ejecución: " + inicial);
   const direccionInicial =
     inicial < pisos[0]
       ? "Subiendo"
       : inicial > pisos[0]
       ? "Bajando"
       : "Estatico";
-  console.log(direccionInicial);
+  console.log("Sentido inicial: " + direccionInicial);
 
   //Variable para manejar el piso actual
   let pisoActual = inicial;
@@ -28,9 +28,9 @@ function elevador(pisos, inicial) {
 
     //Comprobación de piso
     if (pisoIndex >= 0) {
-      console.log("Detenido en " + pisoActual);
+      console.log("Elevador se detiene en el piso " + pisoActual);
       pisos.splice(pisoIndex, 1);
-    } else console.log("En " + pisoActual);
+    } else console.log("Elevador en piso " + pisoActual);
 
     //Manejo de dirección del elevador
     if (pisoActual < pisos[0]) {
@@ -52,7 +52,8 @@ function validaciones(pisos, inicial) {
     return false;
   }
   if (typeof inicial != "number") {
-    console.log("Valor inválido");
+    console.log("Valor inválido para piso inicial");
+    return false;
   }
   if (inicial <= 0 || inicial > 15) {
     console.log("Piso inicial incorrecto");
@@ -60,7 +61,14 @@ function validaciones(pisos, inicial) {
   }
 
   //Validaciones array de pisos
-  if (!Array.isArray(pisos)) return false;
+  if (!Array.isArray(pisos)) {
+    console.log("Valor inválido para array de pisos");
+    return false;
+  }
+  if (pisos.length <= 0) {
+    console.log("Ingrese un piso dentro del array");
+    return false;
+  }
   if (
     !pisos.every(
       (piso) =>
